@@ -1,10 +1,8 @@
 const express = require('express')
 const app = express()
-// const fs = require('fs')
-// const bodyParser = require('body-parser')
 var admin = require("firebase-admin");
 const port = process.env.PORT || 3000
-const sakLocation = process.env.SAK_LOCATION || 'tmp/serviceacccountkey.json'
+const sakLocation = process.env.SAK_LOCATION || '/tmp/serviceacccountkey.json'
 const projectName = process.env.PROJECT_NAME
 
 
