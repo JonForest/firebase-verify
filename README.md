@@ -20,7 +20,9 @@ docker run -p 3000:3000 -d \
 ```
 
 ## To execute directly from the command line
+```
 PORT=3000 \
 SAK_LOCATION=/local/location/of/serviceaccountkey/serviceaccountkey.json \
 PROJECT_NAME=firebase-db-name \
 node app.js
+```
