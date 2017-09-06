@@ -19,8 +19,8 @@ app.get('/ping', function (req, res) {
 })
 
 
-app.get('/verify-id', function (req, res) {
-  const idToken = req.query.token
+app.get('/verify-id/:token', function (req, res) {
+  const idToken = req.param.token
   if (!idToken) {
     res.status(400).send('Token not provided')
     return
