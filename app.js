@@ -3,9 +3,7 @@ const app = express()
 const admin = require("firebase-admin");
 const port = process.env.PORT || 3000
 const sakLocation = process.env.SAK_LOCATION || '/tmp/serviceaccountkey.json'
-const projectName = process.env.PROJECT_NAME 
-
-
+const projectName = process.env.PROJECT_NAME
 const serviceAccount = require(sakLocation);
 
 admin.initializeApp({
@@ -20,7 +18,7 @@ app.get('/ping', function (req, res) {
 
 
 app.get('/verify-id/:token', function (req, res) {
-  const idToken = req.param.token
+  const idToken = req.params.token
   if (!idToken) {
     res.status(400).send('Token not provided')
     return
