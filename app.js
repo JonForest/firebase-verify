@@ -4,7 +4,13 @@ const admin = require("firebase-admin");
 const port = process.env.PORT || 3000
 const sakLocation = process.env.SAK_LOCATION || '/tmp/securetoken.json'
 const projectName = process.env.PROJECT_NAME
-const serviceAccount = require(sakLocation);
+let serviceAccount
+try {
+  serviceAccount = require(sakLocation);
+} catch (e) {
+  console.log('Failed to find service Account with error: ' + e)
+  process.exit()
+}
 
 const firebaseApp = admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
