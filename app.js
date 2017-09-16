@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const admin = require("firebase-admin");
 const port = process.env.PORT || 3000
-const sakLocation = process.env.SAK_LOCATION || '/tmp/serviceaccountkey.json'
+const sakLocation = process.env.SAK_LOCATION || '/tmp/securetoken.json'
 const projectName = process.env.PROJECT_NAME
 const serviceAccount = require(sakLocation);
 
@@ -61,6 +61,20 @@ app.delete('/allowed-user/:email', function (req, res) {
   admin.database().ref(`allowed-users/${email}`).remove()
     .then(() => res.status(204).send())
     .catch((err) => res.status(500).send('Failed to add user'))
+})
+
+app.put('/verify-user/:userId', function(req, res) {
+  const userId = req.params.userId
+  admin.auth().updateUser(userId, {
+    emailVerified: true,
+  })
+    .then(function(userRecord) {
+      // See the UserRecord reference doc for the contents of userRecord.
+      res.status(202).json('{success: true}')
+    })
+    .catch(function(error) {
+      res.status(500).json(`{error: ${error}`)
+    });
 })
 
 app.listen(port, function () {

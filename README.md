@@ -10,7 +10,7 @@ It also doesn't serve over https as, when run locally, it's not exposed to any e
 
 ## To Execute as a Docker container
 ```
-docker build -t <yournamespace>/firebase-verify
+docker build -t <yournamespace>/firebase-verify .
 docker run -p 3000:3000 -d \
   -e PORT=3000 \ 
   -e SAK_LOCATION=/src/app/serviceaccountkey.json \
