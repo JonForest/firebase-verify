@@ -6,11 +6,15 @@ const sakLocation = process.env.SAK_LOCATION || '/tmp/securetoken.json'
 const projectName = process.env.PROJECT_NAME
 const serviceAccount = require(sakLocation);
 
-admin.initializeApp({
+const firebaseApp = admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: `https://${projectName}.firebaseio.com/`
 });
 
+if (!firebaseApp) {
+  console.log('Failed to initialise firebase app')
+  process.exit()
+}
 
 app.get('/ping', function (req, res) {
   res.send('pong')
